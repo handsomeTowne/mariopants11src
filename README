@@ -1,0 +1,12 @@
+Mariopants
+----------
+
+For information about the Win32 or MacOSX version, see mariopants.txt.
+For information about building the Win32 or MacOSX versions, see source.txt
+
+To build and run mariopants, you'll need SDL, zlib, Tcl, and Tk. Some
+distributions (such as Debian-based ones) split these libraries into separate
+packages for development and runtime use. If you use one of these
+distributions, you will need both versions of each library.
+
+Running `make install` as root should be sufficient for a full installation.

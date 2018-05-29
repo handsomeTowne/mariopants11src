@@ -1,0 +1,238 @@
+Mariopants v1.1
+===============
+
+The goal with this tool is an easy to use Mario Paint music
+editor that sounds and performs very close to the original game.
+
+This tool was created by Brad Smith (rainwarrior), based on the original
+game and earlier tools by Strobe and Setrodox. It is open source.
+Please send any questions or comments via my website.
+
+Currently this program is availble for Win32 and Mac OSX (10.6+),
+and source code is available to build for Linux.
+If you would like to help port it to another platform, please contact me.
+
+The Windows build may require the Visual C++ 2010 x86 runtime components.
+If you are missing MSVCR100.dll, please download and install it from Microsoft:
+  http://www.microsoft.com/en-us/download/details.aspx?id=5555
+
+This program uses the following two open source libraries:
+  1. SDL - a cross platform multimedia framework.
+     http://www.libsdl.org
+  2. zlib - gzip file compression required for SNES9X savestates.
+     http://www.zlib.net
+
+The zlib library is used for the gzip compression/decompression
+needed to work with SNES9X save states. (http://www.zlib.net)
+
+
+http://rainwarrior.ca
+
+
+Keyboard
+========
+
+Instrument ........ 1,2,3,4,5,6,7,8,9,0,Q,W,E,R,T
+Length ............ Y
+Eraser ............ U
+
+Play .............. P,F5
+Play From Here .... F6
+Loop .............. L
+Scroll ............ [,],PgUp,PgDn,Home,End
+Tempo ............. -,=
+Metre ............. M
+Song Info ......... I
+Undo .............. Z,Backspace
+
+Save .............. S
+Save As ........... D
+Load .............. F
+Quit .............. Escape
+
+Move Cursor ....... Left,Right,Up,Down
+Enter Note ........ Space
+Erase Note ........ X,Delete
+Preview Beat ...... B
+
+Channel ........... C
+Channel A ......... F1
+Channel B ......... F2
+Channel C ......... F3
+Channel Auto ...... F4
+Show Channels ..... F7
+
+Use Eraser ........ Hold Shift
+Use Preview ....... Hold Ctrl
+Right Click Mode .. F8
+
+Selection Left .... ,
+Selection Right ... .
+Clear Selection ... /
+Erase ............. N
+Cut ............... G
+Copy .............. H
+Paste Overwrite ... J
+Paste Insert ...... K
+
+Extend Song Size .. F9
+Multi Export ...... F10
+
+During playback, any key or click will stop playback, except to adjust tempo.
+When using the info page, Tab and Enter will cycle between text fields.
+
+
+Graphical Interface
+===================
+
+The top row shows the current instrument, and a row of icons to select
+a different instrument. Clicking on the staff will place a note on the
+staff using that instrument (up to 3 on any beat).
+
+The rightmost icon is a tool to set the length of the song. Clicking the
+song length tool on the staff will place the end barline there.
+To extend a song that is not already at the maximum length, scroll to the
+right of the end barline and click there with the length tool.
+
+Below the staff is a panel with the following icons:
+
+[ Stop ] .... Indicates that playback is stopped.
+[ Play ] .... Begin playback.
+[ Loop ] .... Repeats the song when the end is reached.
+[ Tempo ] ... Controls the speed.
+[ Scroll ] .. Scrolls the staff left or right to navigate the song.
+[ Clear ] ... Erases the entire song.
+
+The bottom row contains a series of icons:
+
+[ Bomb ] ..... Quits the program.
+[ Eraser ] ... Erases notes.
+[ A B C ] .... Channel select.
+[ 3/4 ] ...... Uses 3 beats per measure.
+[ 4/4 ] ...... Uses 4 beats per measure.
+[ Save ] ..... Saves the current document, green indicates no changes.
+[ Save As ] .. Saves to a new or different file.
+[ Load ] ..... Loads from file.
+[ Info ] ..... Info page with song title and author.
+[ Undo ] ..... Undoes the last modification to the document.
+
+
+Notes
+=====
+
+Shift+Click will use the eraser instead of entering a note.
+
+Ctrl+Click to listen to a beat instead of editing.
+This is useful for previewing harmony without playing back the whole song.
+
+Right click will act as either a Shift+Click or a Ctrl+Click.
+Press F8 to toggle between these two behaviours.
+
+When saving or loading a file, the type of data saved is
+based on the extension of the file.
+  .sho - Shroom Player file
+  .zst - ZSNES savestate (versions 143 to 151) also .zs1-sz9
+  .000 - SNES9X savestate (version 1.53) also .001-008
+  .wav - WAV render
+
+When writing to savestates, if the file already exists, the music
+data will be inserted into it, replacing only the music.
+If it does not already exist a default savestate will be provided.
+
+To pass the saved data to other emulators, you can use an SNES9X
+or ZSNES savestate to create an .srm file that can be used with other
+emulators by activating the Mario Paint game's save feature in that
+emulator. (If anyone has reverse engineered the Mario Paint .srm
+format, please contact me.)
+
+Looped songs when rendered to WAV will play the loop twice,
+then fade out. A smpl chunk is included, which can be used
+by an appropriate WAV editor to create perfect loop, if needed.
+
+The song title and author information is only saved in the
+.sho format. A savestate does not contain this data.
+
+Unlike the original editor, undo can be used repeatedly to undo
+long chains of modifications.
+
+Due to technical limitations, playback is not strictly synchronized
+with the audio, it is only an approximation. Your display may be slightly
+before or ahead of the audio you hear. If tempo is adjusted during
+playback it may get very desynchronized due to the latency.
+
+
+Advanced Techniques
+===================
+
+This editor allows you to stack up to three notes on the same
+spot. This was not allowed by the original game's editor, but it is
+properly supported by the game if placed in its music data.
+
+Channel select is another advanced feature that was not allowed
+by the original editor, but is supported by its engine. The three
+notes entered into a beat noramlly go into three separate channels,
+in the order they were placed (A,B,C). On the next beat if a new note
+is played on the same channel, it will cut off the previous sound
+on that channel. By placing notes on specific channels, you can
+have better control over how the sounds will overlap.
+When stacked, channel A appears at the bottom, C at the top.
+
+When channel select is off, it will enter notes automatically into
+the three channels in order, like the original game. With channel
+select on, notes will be entered only into the selected channel,
+and will overwrite any note already in that channel.
+When using an eraser with channel select off, the beat will
+automatically reorganize the remaining notes on channels A,B
+or just A. Use the eraser with channel select on to avoid this.
+
+Extended song sizes (longer than 96 columns) may be enabled by pressing F9.
+This will save and load as .sho files, but songs longer than 96 cannot
+saved as individual savestates. A series of up to 30 sequential savestates
+can be exported by pressing F10.
+
+The extended limit mode will be indicated by a red highlight on the scroll bar.
+
+
+Hardware Accuracy
+=================
+
+The samples were recorded from SNES9X at the SNES native 32000Hz samplerate.
+Every instrument has been recorded at every playable pitch.
+Sound rendering is done at 320000Hz to preserve fidelity.
+
+The original SNES game has a complicated tempo algorithm, which generates
+a slightly uneven beat. This is not emulated, in favour of a smoother,
+perfectly even beat.
+
+On the SNES game, when 2 or 3 notes are played on the same beat
+sometimes, but only rarely, one of these notes plays with a slight
+delay from the others. This is not emulated.
+
+The delta action of SNES ADPCM samples is not emulated. The recorded samples
+are regular PCM. To prevent pops when interrupting a playing sample, there
+is a 32ms fade on the interrupted sample.
+
+
+Change Log
+==========
+
+1.1 - 3/18/2014
+ - Linux version created by Brandon Mulcahy (Jangler).
+
+1.1 - 12/17/2013
+ - Mac OS X version created.
+
+1.1 - 7/26/2013
+ - Fixed frame timing, now should run at consisten 60hz if sufficient CPU is available.
+ - Support for z10-z99 ZSNES savestate files.
+ - Fixed clicks in baby C, and yoshi A.
+ - Fixed pop at end of some samples (off-by-one error on length).
+ - Cut/Copy/Paste functionality.
+ - F9 enables extended song lengths.
+ - F10 exports extended songs as multiple savestates.
+ - Filename now appears in window caption.
+ - Confirm unsaved changes on load.
+ - Migrated Windows version to Visual Studio 2012.
+
+1.0 - 3/01/2013
+ - First release.
